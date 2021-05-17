@@ -95,18 +95,24 @@ let grandmaMultiple = document.getElementById('grandma-multiple');
 buyGrandma.addEventListener("click", function() {
   //make sure we have enough cookies and subtract our cookies from the price
   if (cookieCount >= grandmaPriceAmount) {
+
    // Subtract cookies from the price of the item.
    cookieCount +=  - grandmaPriceAmount;
    refreshCookieCount()
+
     //upgrade power level
     grandmaLevelNumber += 1;
+
     //update price
     grandmaPriceAmount = Math.floor(grandmaPriceAmount * 1.33);
+
     //update grandma power
     grandmaPower += 10;
+
     //turn autoGrandma on!
     autoGrandma = true
     autoGrandmaStart();
+
     //refresh shop item
     refreshGrandma();
   }
@@ -145,37 +151,43 @@ buyGrandma.addEventListener("click", function() {
 
   //buy a facility
   buyFacility.addEventListener("click", function() {
+
       //set autoLoop to false
       facilityAuto = false;
+
       //make sure we have enough cookies
       if (cookieCount >= facilityPriceAmount) {
         cookieCount -= facilityPriceAmount;
         refreshCookieCount()
+
        //upgrade power level
        facilityLevelNumber += 1;
+
        //update price
        facilityPriceAmount = Math.floor(facilityPriceAmount * 1.33);
+
        //update facility power
        facilityPower += 600;
+
        //turn autoFacility on!
        facilityAuto = true
        autoFacilityStart();
+
        //refresh shop item
        refreshFacility();
      }
     })
 
-
+    //refresh shop
+      let refreshFacility = function() {
+      facilityLevel.innerHTML = facilityLevelNumber
+      facilityPrice.innerHTML = facilityPriceAmount;
+      facilityMultiple.innerHTML = facilityPower - 600;
+    }
   //game loop
     let autoFacilityStart = function() {
       let facilityInt = window.setInterval(function(){
         cookieCount += facilityPower;
         refreshCookieCount();
-      }, 1000);
-    }
-  //refresh shop
-    let refreshFacility = function() {
-    facilityLevel.innerHTML = facilityLevelNumber
-    facilityPrice.innerHTML = facilityPriceAmount;
-    facilityMultiple.innerHTML = facilityPower - 600;
-  }
+        }, 1000);
+      }
